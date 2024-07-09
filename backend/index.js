@@ -48,6 +48,17 @@ app.post('/artists', async (req, res) => {
     }
 });
 
+app.get('/albums', async (req, res) => {
+    const limit = parseInt(req.query.limit, 10) || 3;
+    try {
+        const result = await sql.query(`SELECT TOP ${limit} * FROM Albums`);
+        res.json(result.recordset);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
+
+
 app.get('/search', async (req, res) => {
     const { q } = req.query;
     try {

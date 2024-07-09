@@ -1,8 +1,6 @@
-// src/components/Dashboard.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Dashboard.css'; // Import the CSS file
+import './Dashboard.css'; 
 
 const Dashboard = () => {
     const [searchQuery, setSearchQuery] = useState('');

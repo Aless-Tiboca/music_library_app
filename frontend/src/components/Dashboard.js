@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Dashboard.css'; 
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
+import './Dashboard.css';
 
 const Dashboard = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
     const [albums, setAlbums] = useState([]);
+    const [searchItems, setSearchItems] = useState([]);
 
     useEffect(() => {
         // Fetch the first 3 albums from the database
@@ -16,42 +16,42 @@ const Dashboard = () => {
             .catch(error => {
                 console.error('There was an error fetching the albums!', error);
             });
+
+        // Fetch all albums for search autocomplete
+        axios.get('http://localhost:3001/api/albums')
+            .then(response => {
+                const searchData = response.data.map(album => ({
+                    id: album.id,
+                    name: album.title
+                }));
+                setSearchItems(searchData);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the albums for search!', error);
+            });
     }, []);
 
-    const handleSearchChange = (event) => {
-        const query = event.target.value;
-        setSearchQuery(query);
+    const handleOnSearch = (string, results) => {
+        // onSearch handler can be used to show suggestions
+        console.log(string, results);
+    };
 
-        if (query.length > 1) {
-            axios.get(`http://localhost:3001/search?type=albums&q=${query}`)
-                .then(response => {
-                    setSearchResults(response.data);
-                })
-                .catch(error => {
-                    console.error('There was an error fetching the search results!', error);
-                });
-        } else {
-            setSearchResults([]);
-        }
+    const handleOnSelect = item => {
+        // onSelect handler can be used to redirect or show item details
+        console.log(item);
     };
 
     return (
         <div className="dashboard">
             <h1>Music Library Dashboard</h1>
             <div className="search-bar">
-                <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
+                <ReactSearchAutocomplete
+                    items={searchItems}
+                    onSearch={handleOnSearch}
+                    onSelect={handleOnSelect}
+                    autoFocus
                     placeholder="Search for albums..."
                 />
-                {searchResults.length > 0 && (
-                    <ul className="search-results">
-                        {searchResults.map(result => (
-                            <li key={result.id}>{result.title}</li>
-                        ))}
-                    </ul>
-                )}
             </div>
             <h2>Top 3 Albums</h2>
             <ul className="album-list">

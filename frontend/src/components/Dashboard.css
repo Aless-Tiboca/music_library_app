@@ -9,14 +9,6 @@
     margin-bottom: 20px;
 }
 
-.search-bar input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
 .search-results {
     position: absolute;
     top: 40px;

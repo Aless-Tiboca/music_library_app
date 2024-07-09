@@ -1,5 +1,8 @@
+// src/components/Dashboard.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Dashboard.css'; // Import the CSS file
 
 const Dashboard = () => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -35,9 +38,9 @@ const Dashboard = () => {
     };
 
     return (
-        <div>
-            <h1>Dashboard</h1>
-            <div>
+        <div className="dashboard">
+            <h1>Music Library Dashboard</h1>
+            <div className="search-bar">
                 <input
                     type="text"
                     value={searchQuery}
@@ -45,7 +48,7 @@ const Dashboard = () => {
                     placeholder="Search for albums..."
                 />
                 {searchResults.length > 0 && (
-                    <ul>
+                    <ul className="search-results">
                         {searchResults.map(result => (
                             <li key={result.id}>{result.title}</li>
                         ))}
@@ -53,9 +56,9 @@ const Dashboard = () => {
                 )}
             </div>
             <h2>Top 3 Albums</h2>
-            <ul>
+            <ul className="album-list">
                 {albums.map(album => (
-                    <li key={album.id}>
+                    <li key={album.id} className="album-item">
                         <h3>{album.title}</h3>
                         <p>{album.description}</p>
                     </li>

@@ -5,12 +5,18 @@ sql.connect(dbConfig);
 
 const Album = {
     getAll: async (limit = 3) => {
-        const result = await sql.query`SELECT TOP ${limit} * FROM Albums`;
+        const pool = await sql.connect(dbConfig);
+        const result = await pool.request()
+            .input('limit', sql.Int, limit)
+            .query('SELECT TOP (@limit) * FROM Albums');
         return result.recordset;
     },
 
     searchByTitle: async (title) => {
-        const result = await sql.query`SELECT id, title FROM Albums WHERE title LIKE '%' + ${title} + '%'`;
+        const pool = await sql.connect(dbConfig);
+        const result = await pool.request()
+            .input('title', sql.NVarChar, `%${title}%`)
+            .query('SELECT id, title FROM Albums WHERE title LIKE @title');
         return result.recordset;
     }
 };

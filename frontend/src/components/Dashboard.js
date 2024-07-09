@@ -9,7 +9,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         // Fetch the first 3 albums from the database
-        axios.get('http://localhost:3001/albums?limit=3')
+        axios.get('http://localhost:3001/api/albums?limit=3')
             .then(response => {
                 setAlbums(response.data);
             })

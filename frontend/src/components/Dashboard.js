@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import './Dashboard.css';
 
 const Dashboard = () => {
     const [albums, setAlbums] = useState([]);
     const [searchItems, setSearchItems] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Fetch the first 3 albums from the database
@@ -31,14 +33,9 @@ const Dashboard = () => {
             });
     }, []);
 
-    const handleOnSearch = (string, results) => {
-        // onSearch handler can be used to show suggestions
-        console.log(string, results);
-    };
-
     const handleOnSelect = item => {
-        // onSelect handler can be used to redirect or show item details
-        console.log(item);
+        // Navigate to the AlbumDetail page
+        navigate(`/album/${item.id}`);
     };
 
     return (
@@ -47,7 +44,6 @@ const Dashboard = () => {
             <div className="search-bar">
                 <ReactSearchAutocomplete
                     items={searchItems}
-                    onSearch={handleOnSearch}
                     onSelect={handleOnSelect}
                     autoFocus
                     placeholder="Search for albums..."
@@ -56,7 +52,7 @@ const Dashboard = () => {
             <h2>Top 3 Albums</h2>
             <ul className="album-list">
                 {albums.map(album => (
-                    <li key={album.id} className="album-item">
+                    <li key={album.id} className="album-item" onClick={() => navigate(`/album/${album.id}`)}>
                         <h3>{album.title}</h3>
                         <p>{album.description}</p>
                     </li>

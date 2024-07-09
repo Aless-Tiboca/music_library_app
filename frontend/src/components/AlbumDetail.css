@@ -1,0 +1,24 @@
+.album-detail {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.album-detail h1 {
+    margin-bottom: 10px;
+}
+
+.album-detail h2 {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.album-detail ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.album-detail li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}

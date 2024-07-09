@@ -9,6 +9,7 @@ router.get('/artists/:id', artistController.getArtistById);
 router.post('/artists', artistController.createArtist);
 
 router.get('/albums', albumController.getAllAlbums);
+router.get('/albums/:id', albumController.getAlbumById);
 router.get('/search', searchController.search);
 
 module.exports = router;

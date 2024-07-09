@@ -4,12 +4,22 @@ const dbConfig = require('../config/dbConfig');
 sql.connect(dbConfig);
 
 const Album = {
-    getAll: async (limit = 3) => {
+    getAll: async (limit) => {
+        const pool = await sql.connect(dbConfig);
+        let query = 'SELECT * FROM Albums';
+        if (limit) {
+            query = `SELECT TOP (${limit}) * FROM Albums`;
+        }
+        const result = await pool.request().query(query);
+        return result.recordset;
+    },
+
+    getById: async (id) => {
         const pool = await sql.connect(dbConfig);
         const result = await pool.request()
-            .input('limit', sql.Int, limit)
-            .query('SELECT TOP (@limit) * FROM Albums');
-        return result.recordset;
+            .input('id', sql.Int, id)
+            .query('SELECT a.*, ar.name as artistName FROM Albums a JOIN Artists ar ON a.artist_id = ar.id WHERE a.id = @id');
+        return result.recordset[0];
     },
 
     searchByTitle: async (title) => {

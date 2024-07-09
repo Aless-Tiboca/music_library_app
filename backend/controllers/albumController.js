@@ -3,9 +3,18 @@ const AlbumService = require('../services/albumService');
 const AlbumController = {
     getAllAlbums: async (req, res) => {
         try {
-            const limit = parseInt(req.query.limit, 10) || 3;
+            const limit = req.query.limit ? parseInt(req.query.limit, 10) : null;
             const albums = await AlbumService.getAllAlbums(limit);
             res.json(albums);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    },
+
+    getAlbumById: async (req, res) => {
+        try {
+            const album = await AlbumService.getAlbumById(req.params.id);
+            res.json(album);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }

@@ -46,6 +46,7 @@
     border-radius: 25px;
     width: 75%;
     animation: growIn 1s ease-in-out;
+    z-index: 1000;
 }
 
 .search-bar input {
@@ -75,10 +76,12 @@
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
+    margin-bottom: 10px;
 }
 
 .search-results li {
     padding: 10px;
+    z-index: 1000;
     cursor: pointer;
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -94,7 +97,7 @@
     gap: 20px;
     margin-top: 40px;
     animation: fadeIn 1s ease-in-out;
-    z-index: 1; /* Ensure albums are above the background */
+    z-index: 0; /* Ensure albums are above the background */
 }
 
 .top-albums {

@@ -19,21 +19,22 @@ const Dashboard = () => {
             });
 
         // Fetch all albums for search suggestions
-        axios.get('http://localhost:3001/api/albums')
+        axios.get('http://localhost:3001/api/search')
             .then(response => {
-                const items = response.data.map(album => ({
-                    id: album.id,
-                    name: album.title
-                }));
-                setSearchItems(items);
+                setSearchItems(response.data);
             })
             .catch(error => {
-                console.error('There was an error fetching the albums for search!', error);
+                console.error('There was an error fetching the search data!', error);
             });
+            
     }, []);
 
     const handleOnSelect = item => {
-        navigate(`/album/${item.id}`);
+        if (item.type === 'album') {
+            navigate(`/album/${item.id}`);
+        } else if (item.type === 'artist') {
+            navigate(`/artist/${item.id}`);
+        }
     };
 
     return (

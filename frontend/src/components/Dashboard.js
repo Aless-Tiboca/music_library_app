@@ -40,7 +40,10 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <h1>Music Library Dashboard</h1>
+            <header className="dashboard-header">
+                <h1>Music Library Dashboard</h1>
+                <h2>Explore and Discover Albums</h2>
+            </header>
             <div className="search-bar">
                 <ReactSearchAutocomplete
                     items={searchItems}

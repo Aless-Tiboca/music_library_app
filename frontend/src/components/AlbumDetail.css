@@ -1,24 +1,86 @@
 .album-detail {
     padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 80%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #2C3E50;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
 }
 
 .album-detail h1 {
+    margin-left: 10px;
     margin-bottom: 10px;
+    font-size: 40px;
+    color: #E8EFF6;
 }
 
 .album-detail h2 {
+    margin-left: 20px;
     margin-bottom: 20px;
-    color: #666;
+    color: #B0C4DE;
 }
 
-.album-detail ul {
-    list-style-type: none;
-    padding: 0;
+.album-detail p {
+    margin-left: 20px;
+    margin-bottom: 40px;
+    color: #B0C4DE;
 }
 
-.album-detail li {
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #3A5A6C;
+    width: 66.66%;
+}
+
+.song-cover {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    margin-right: 20px;
+    background-color: #6C8E9D;
+}
+
+.song-info {
+    flex-grow: 1;
+}
+
+.song-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #E8EFF6;
+}
+
+.song-artist {
+    font-size: 14px;
+    color: #B0C4DE;
+}
+
+.song-waveform {
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.waveform-image {
+    height: 15px;
+    width: 200px;
+    object-fit: cover;
+    filter: invert(1);
+}
+
+.song-duration {
+    font-size: 14px;
+    color: #B0C4DE;
 }

@@ -1,6 +1,6 @@
 .albums-page {
     text-align: center;
-    background: linear-gradient(to right, #233140, #1e1e1e); /* Gradient background */
+    background: linear-gradient(to right, #233140, #1e1e1e);
     color: white;
     min-height: 100vh;
     display: flex;
@@ -9,8 +9,6 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    position: relative; /* Needed for SVG positioning */
-    overflow: hidden; /* To ensure SVG stays within bounds */
 }
 
 @keyframes fadeIn {
@@ -57,7 +55,6 @@
     justify-content: center;
     animation: growIn 1s ease-in-out;
     transition: transform 0.3s ease-in-out;
-    z-index: 1; /* Ensure albums are above the background */
 }
 
 .album:hover {
@@ -67,17 +64,17 @@
 .album h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
-    color: #E8EFF6; /* Lightest Blue */
+    color: #E8EFF6;
 }
 
 .album p {
     font-size: 1rem;
     font-weight: bold;
-    color: #B0C4DE; /* Light Slate Blue */
+    color: #B0C4DE;
 }
 
 .album a {
-    color: #E8EFF6; /* Lightest Blue */
+    color: #E8EFF6;
     text-decoration: none;
     margin-top: 10px;
 }

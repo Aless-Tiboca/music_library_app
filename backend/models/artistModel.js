@@ -16,6 +16,14 @@ const Artist = {
 
     create: async (name) => {
         await sql.query`INSERT INTO Artists (name) VALUES (${name})`;
+    },
+
+    getAlbumsByArtist: async (id) => {
+        const pool = await sql.connect(dbConfig);
+        const result = await pool.request()
+            .input('id', sql.Int, id)
+            .query('SELECT * FROM Albums WHERE artist_id = @id');
+        return result.recordset;
     }
 };
 

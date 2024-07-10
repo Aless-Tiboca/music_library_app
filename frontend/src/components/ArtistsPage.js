@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './ArtistsPage.css';
 
 const ArtistsPage = () => {
@@ -25,9 +26,11 @@ const ArtistsPage = () => {
             <h1>All Artists</h1>
             <div className="artists-list">
                 {artists.map(artist => (
-                    <div key={artist.id} className="artist" style={{ backgroundColor: getRandomColor() }}>
-                        <h2>{artist.name}</h2>
-                    </div>
+                    <Link key={artist.id} to={`/artist/${artist.id}`} className="artist-link">
+                        <div className="artist" style={{ backgroundColor: getRandomColor() }}>
+                            <h2>{artist.name}</h2>
+                        </div>
+                    </Link>
                 ))}
             </div>
         </div>

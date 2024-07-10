@@ -11,5 +11,7 @@ router.post('/artists', artistController.createArtist);
 router.get('/albums', albumController.getAllAlbums);
 router.get('/albums/:id', albumController.getAlbumById);
 router.get('/search', searchController.search);
+router.get('/artists/:id', artistController.getArtistById);
+router.get('/artists/:id/albums', artistController.getAlbumsByArtist);
 
 module.exports = router;

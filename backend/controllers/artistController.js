@@ -26,7 +26,18 @@ const ArtistController = {
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
-    }
+    },
+
+    getAlbumsByArtist: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const albums = await ArtistService.getAlbumsByArtist(id);
+            res.json(albums);
+        } catch (error) {
+            console.error('Error fetching albums by artist:', error);
+            res.status(500).send('Server error');
+        }
+    },
 };
 
 module.exports = ArtistController;

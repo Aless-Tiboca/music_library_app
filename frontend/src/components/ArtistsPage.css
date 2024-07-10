@@ -1,0 +1,71 @@
+.artists-page {
+    text-align: center;
+    background: linear-gradient(to right, #233140, #1e1e1e); /* Gradient background */
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    position: relative; /* Needed for SVG positioning */
+    overflow: hidden; /* To ensure SVG stays within bounds */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes growIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.artists-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+    animation: fadeIn 1s ease-in-out;
+    z-index: 1; /* Ensure artists are above the background */
+    max-width: calc(5 * 200px + 4 * 20px); /* Width for 5 artists plus 4 gaps */
+}
+
+.artist {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: growIn 1s ease-in-out;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1; /* Ensure artists are above the background */
+}
+
+.artist:hover {
+    transform: scale(1.05);
+}
+
+.artist h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #2C3E50; /* Lightest Blue */
+}

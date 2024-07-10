@@ -1,4 +1,3 @@
-const SearchService = require('../services/searchService');
 const ArtistService = require('../services/artistService');
 const AlbumService = require('../services/albumService');
 

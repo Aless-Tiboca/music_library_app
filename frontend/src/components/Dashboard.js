@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import './Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
     const [albums, setAlbums] = useState([]);
@@ -10,7 +10,6 @@ const Dashboard = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Fetch the first 3 albums from the database
         axios.get('http://localhost:3001/api/albums?limit=3')
             .then(response => {
                 setAlbums(response.data);
@@ -19,14 +18,14 @@ const Dashboard = () => {
                 console.error('There was an error fetching the albums!', error);
             });
 
-        // Fetch all albums for search autocomplete
+        // Fetch all albums for search suggestions
         axios.get('http://localhost:3001/api/albums')
             .then(response => {
-                const searchData = response.data.map(album => ({
+                const items = response.data.map(album => ({
                     id: album.id,
                     name: album.title
                 }));
-                setSearchItems(searchData);
+                setSearchItems(items);
             })
             .catch(error => {
                 console.error('There was an error fetching the albums for search!', error);
@@ -34,33 +33,34 @@ const Dashboard = () => {
     }, []);
 
     const handleOnSelect = item => {
-        // Navigate to the AlbumDetail page
         navigate(`/album/${item.id}`);
     };
 
     return (
         <div className="dashboard">
+            <img src={"https://svgsilh.com/svg/26432.svg"} alt="dots background" className="dots-background" />
             <header className="dashboard-header">
-                <h1>Music Library Dashboard</h1>
-                <h2>Explore and Discover Albums</h2>
+                <div className="header-text">The best place to know your music</div>
+                <div className="search-bar">
+                    <ReactSearchAutocomplete
+                        items={searchItems}
+                        onSelect={handleOnSelect}
+                        autoFocus
+                        styling={{ borderRadius: "25px", backgroundColor: "#1e1e1e", color: "#B0C4DE" }}
+                    />
+                </div>
             </header>
-            <div className="search-bar">
-                <ReactSearchAutocomplete
-                    items={searchItems}
-                    onSelect={handleOnSelect}
-                    autoFocus
-                    placeholder="Search for albums..."
-                />
+            <div className="albums">
+                <h1>Top 3 Albums</h1>
+                <div className='top-albums'>
+                    {albums.map(album => (
+                        <div key={album.id} className="album" onClick={() => navigate(`/album/${album.id}`)}>
+                            <h2>{album.title}</h2>
+                            <p>By {album.artistName}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
-            <h2>Top 3 Albums</h2>
-            <ul className="album-list">
-                {albums.map(album => (
-                    <li key={album.id} className="album-item" onClick={() => navigate(`/album/${album.id}`)}>
-                        <h3>{album.title}</h3>
-                        <p>{album.description}</p>
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 };

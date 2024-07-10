@@ -6,9 +6,13 @@ sql.connect(dbConfig);
 const Album = {
     getAll: async (limit) => {
         const pool = await sql.connect(dbConfig);
-        let query = 'SELECT * FROM Albums';
+        let query = `
+            SELECT a.*, ar.name as artistName
+            FROM Albums a
+            JOIN Artists ar ON a.artist_id = ar.id
+        `;
         if (limit) {
-            query = `SELECT TOP (${limit}) * FROM Albums`;
+            query += ` ORDER BY a.id OFFSET 0 ROWS FETCH NEXT ${limit} ROWS ONLY`;
         }
         const result = await pool.request().query(query);
         return result.recordset;
